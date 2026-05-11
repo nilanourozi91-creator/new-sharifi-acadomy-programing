@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
             // TeacherSeeder::class
             // SinfSeeder::class,
             // PaymentSeeder::class,
-            SalarySeeder::class
+            // SalarySeeder::class
         ]);
     }
 }

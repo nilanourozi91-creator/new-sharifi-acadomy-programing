@@ -1,7 +1,7 @@
 @import "tailwindcss";
-
+@import "../../vendor/livewire/flux/dist/flux.css";
 /* Required by all components */
-@import "../../vendor/filament/support/resources/css/index.css";
+/* @import "../../vendor/filament/support/resources/css/index.css";
 
 /* Required by actions and tables */
 @import "../../vendor/filament/actions/resources/css/index.css";
@@ -24,4 +24,4 @@
 /* Required by widgets */
 @import "../../vendor/filament/widgets/resources/css/index.css";
 
-@variant dark (&:where(.dark, .dark *));
+@variant dark (&:where(.dark, .dark *)); */
