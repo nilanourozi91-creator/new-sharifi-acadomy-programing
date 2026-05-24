@@ -3,9 +3,11 @@
 namespace App\Livewire\Admin;
 
 use App\Models\Admin;
+use Filament\Actions\Action;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\Concerns\InteractsWithActions;
 use Filament\Actions\Contracts\HasActions;
+use Filament\Notifications\Notification;
 use Filament\Schemas\Concerns\InteractsWithSchemas;
 use Filament\Schemas\Contracts\HasSchemas;
 use Filament\Tables\Columns\TextColumn;
@@ -27,8 +29,9 @@ class ListAdmins extends Component implements HasActions, HasSchemas, HasTable
         return $table
             ->query(fn (): Builder => Admin::query())
             ->columns([
+                TextColumn::make('user.name'),
                 TextColumn::make('last_name'),
-                TextColumn::make('bio')
+                TextColumn::make('bio')->toggleable(isToggledHiddenByDefault:true)
             ])
             ->filters([
                 //
@@ -37,7 +40,7 @@ class ListAdmins extends Component implements HasActions, HasSchemas, HasTable
                 //
             ])
             ->recordActions([
-                //
+                Action::make('delete')->requiresConfirmation()->action(fn (Admin $reord)=>$reord->delete($reord->id))->color('danger'),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

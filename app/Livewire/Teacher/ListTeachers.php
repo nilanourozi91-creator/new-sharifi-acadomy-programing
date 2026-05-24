@@ -3,9 +3,11 @@
 namespace App\Livewire\Teacher;
 
 use App\Models\Teacher;
+use Filament\Actions\Action;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\Concerns\InteractsWithActions;
 use Filament\Actions\Contracts\HasActions;
+use Filament\Notifications\Notification;
 use Filament\Schemas\Concerns\InteractsWithSchemas;
 use Filament\Schemas\Contracts\HasSchemas;
 use Filament\Tables\Columns\TextColumn;
@@ -27,8 +29,12 @@ class ListTeachers extends Component implements HasActions, HasSchemas, HasTable
         return $table
             ->query(fn (): Builder => Teacher::query())
             ->columns([
-                TextColumn::make('last_name'),
-                TextColumn::make('phone_number')
+                TextColumn::make('user.name')->label('teacher'),
+                TextColumn::make('last_name')->searchable(),
+                TextColumn::make('sinfs.title')->limitList()->badge(),
+                TextColumn::make('phone_number')->toggleable(isToggledHiddenByDefault:true),
+                TextColumn::make('degree_of_education')->badge(),
+                TextColumn::make('bio')->limit(10)->toggleable(isToggledHiddenByDefault:true),
             ])
             ->filters([
                 //
@@ -37,7 +43,9 @@ class ListTeachers extends Component implements HasActions, HasSchemas, HasTable
                 //
             ])
             ->recordActions([
-                //
+                Action::make('delete')->requiresConfirmation()->action(fn(Teacher $record)=>$record->delete($record->id))->color('danger')->successNotification(
+                    Notification::make()->title('teacher deleted sucssesfully')->success()
+                ),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

@@ -19,4 +19,7 @@ class Student extends Model
     public function payments(){
         return $this->hasMany(Payment::class);
     }
+     public function students(){
+        return $this->belongsToMany(Student::class,'');
+    }
 }

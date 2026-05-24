@@ -10,10 +10,10 @@ class Admin extends Model
         "last_name",
         "image_url",
         "bio",
-        "user_id"
+        ""
     ];
 
     public function user(){
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class );
     }
 }

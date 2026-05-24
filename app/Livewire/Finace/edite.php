@@ -1,0 +1,50 @@
+<?php
+
+namespace App\Livewire\Finace;
+
+use App\Models\Payment;
+use Filament\Actions\Concerns\InteractsWithActions;
+use Filament\Actions\Contracts\HasActions;
+use Filament\Schemas\Components\Section;
+use Filament\Schemas\Concerns\InteractsWithSchemas;
+use Filament\Schemas\Contracts\HasSchemas;
+use Filament\Schemas\Schema;
+use Illuminate\Contracts\View\View;
+use Livewire\Component;
+
+class edite extends Component implements HasActions, HasSchemas
+{
+    use InteractsWithActions;
+    use InteractsWithSchemas;
+
+    public Payment $record;
+
+    public ?array $data = [];
+
+    public function mount(): void
+    {
+        $this->form->fill($this->record->attributesToArray());
+    }
+
+    public function form(Schema $schema): Schema
+    {
+        return $schema
+            ->components([
+                Section::make('edite payment')->description('you can edit the spasific columw')->schema([]),
+            ])
+            ->statePath('data')
+            ->model($this->record);
+    }
+
+    public function save(): void
+    {
+        $data = $this->form->getState();
+
+        $this->record->update($data);
+    }
+
+    public function render(): View
+    {
+        return view('livewire.finace.edite');
+    }
+}

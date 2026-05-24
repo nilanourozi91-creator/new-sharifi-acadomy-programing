@@ -3,6 +3,7 @@
 namespace App\Livewire\Sinf;
 
 use App\Models\Sinf;
+use Filament\Actions\Action;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\Concerns\InteractsWithActions;
 use Filament\Actions\Contracts\HasActions;
@@ -27,8 +28,13 @@ class ListSinfs extends Component implements HasActions, HasSchemas, HasTable
         return $table
             ->query(fn (): Builder => Sinf::query())
             ->columns([
-                TextColumn::make('title'),
-                textColumn::make('description')
+            
+                TextColumn::make('title')->label('class')->searchable(),
+                textColumn::make('description')->limit(10)->toggleable(isToggledHiddenByDefault:true),
+                TextColumn::make('start_date'),
+                 TextColumn::make('payments.student.user.name')->label('Students'),
+                TextColumn::make('end_date'),
+                TextColumn::make('teacher.user.name')->label('teacher'),
             ])
             ->filters([
                 //
@@ -37,7 +43,7 @@ class ListSinfs extends Component implements HasActions, HasSchemas, HasTable
                 //
             ])
             ->recordActions([
-                //
+                Action::make('edite')->url(fn(Sinf $record):string=>route('class.edit',$record))->openUrlInNewTab()
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

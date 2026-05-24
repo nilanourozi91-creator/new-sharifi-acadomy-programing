@@ -1,10 +1,22 @@
 <?php
 
 use App\Livewire\Admin\ListAdmins;
+use App\Livewire\Chat;
+use App\Livewire\Chattt;
+use App\Livewire\Payment\editpyment;
+use App\Livewire\Payment\ListPayments;
+use App\Livewire\Salary\editsalary;
+use App\Livewire\Salary\ListSalaries;
+use App\Livewire\Sinf\editesinf;
+use App\Livewire\Sinf\editsalaries;
 use App\Livewire\Sinf\ListSinfs;
+use App\Livewire\Student\editstudent;
 use App\Livewire\Student\ListStudents;
+use App\Livewire\Teacher\editteacher;
 use App\Livewire\Teacher\ListTeachers;
+use App\Livewire\Users\editUser;
 use App\Livewire\Users\ListUsers;
+use App\View\Components\chatform;
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 
@@ -25,10 +37,18 @@ Route::middleware(['auth'])->group(function () {
 });
 Route::middleware(['auth'])->group(function (){
     Route::get('/manage-users',ListUsers::class)->name('users.index');
+    // Route::get('/manage-users',editUser::class)->name('users.edit');
     Route::get('/manage-teachers',ListTeachers::class)->name('teachers.index');
+    // Route::get('/manage-teachers',editteacher::class)->name('teachers.edit');
     Route::get('/manage-students',ListStudents::class)->name('students.index');
+    Route::get('/manage-students/{record}',editstudent::class)->name('students.edit');
     Route::get('/admin',ListAdmins::class)->name('admin.index');
-    Route::get('/manage-classes',ListSinfs::class)->name('classes.index');
+    Route::get('/manage-classes',ListSinfs::class)->name('classes.index'); 
+    Route::get('/edit-class/{record}',editesinf::class)->name('class.edit'); 
+    route::get('/manage-payments',ListPayments::class)->name('payments.index');
+    route::get('/manage-payments/{record}',editpyment::class)->name('payments.edite');
+    route::get('/manage-salaries',ListSalaries::class)->name('salaries.index');
+    route::get('/manage-salaries/{record}',editsalary::class)->name('salaries.edit');
 });
 
 require __DIR__.'/auth.php';
