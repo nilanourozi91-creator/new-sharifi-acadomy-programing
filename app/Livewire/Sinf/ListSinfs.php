@@ -7,6 +7,7 @@ use Filament\Actions\Action;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\Concerns\InteractsWithActions;
 use Filament\Actions\Contracts\HasActions;
+use Filament\Notifications\Notification;
 use Filament\Schemas\Concerns\InteractsWithSchemas;
 use Filament\Schemas\Contracts\HasSchemas;
 use Filament\Tables\Columns\TextColumn;
@@ -32,7 +33,7 @@ class ListSinfs extends Component implements HasActions, HasSchemas, HasTable
                 TextColumn::make('title')->label('class')->searchable(),
                 textColumn::make('description')->limit(10)->toggleable(isToggledHiddenByDefault:true),
                 TextColumn::make('start_date'),
-                 TextColumn::make('payments.student.user.name')->label('Students'),
+                TextColumn::make('payments.student.user.name')->label('Students'),
                 TextColumn::make('end_date'),
                 TextColumn::make('teacher.user.name')->label('teacher'),
             ])
@@ -43,6 +44,8 @@ class ListSinfs extends Component implements HasActions, HasSchemas, HasTable
                 //
             ])
             ->recordActions([
+                 Action::make('delete')->requiresConfirmation()->action(fn(Sinf $record)=>$record->delete($record->id))->color('danger')->successNotification(
+                    Notification::make()->title('teacher deleted sucssesfully')->success()),
                 Action::make('edite')->url(fn(Sinf $record):string=>route('class.edit',$record))->openUrlInNewTab()
             ])
             ->toolbarActions([

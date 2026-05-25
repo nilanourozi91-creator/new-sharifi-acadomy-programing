@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\Admin\editadmin;
 use App\Livewire\Admin\ListAdmins;
 use App\Livewire\Chat;
 use App\Livewire\Chattt;
@@ -37,12 +38,13 @@ Route::middleware(['auth'])->group(function () {
 });
 Route::middleware(['auth'])->group(function (){
     Route::get('/manage-users',ListUsers::class)->name('users.index');
-    // Route::get('/manage-users',editUser::class)->name('users.edit');
+    Route::get('/manage-users{record}',editUser::class)->name('users.edit');
     Route::get('/manage-teachers',ListTeachers::class)->name('teachers.index');
-    // Route::get('/manage-teachers',editteacher::class)->name('teachers.edit');
+    Route::get('/manage-teachers{record}',editteacher::class)->name('teachers.edit');
     Route::get('/manage-students',ListStudents::class)->name('students.index');
     Route::get('/manage-students/{record}',editstudent::class)->name('students.edit');
     Route::get('/admin',ListAdmins::class)->name('admin.index');
+    Route::get('/admin/{record}',editadmin::class)->name('admin.edit');
     Route::get('/manage-classes',ListSinfs::class)->name('classes.index'); 
     Route::get('/edit-class/{record}',editesinf::class)->name('class.edit'); 
     route::get('/manage-payments',ListPayments::class)->name('payments.index');

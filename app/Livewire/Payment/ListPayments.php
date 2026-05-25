@@ -30,7 +30,7 @@ class ListPayments extends Component implements HasActions, HasSchemas, HasTable
             ->query(fn (): Builder => Payment::query())
             ->columns([
                 TextColumn::make('amount')->money('afg'),
-                TextColumn::make('student.user.name')->label('student_name')->searchable(),
+                TextColumn::make('student.user.name')->label('name')->searchable(),
                 TextColumn::make('sinf.title')->label('classes'),
             ])
             ->filters([
@@ -40,9 +40,7 @@ class ListPayments extends Component implements HasActions, HasSchemas, HasTable
             ])
             ->recordActions([
                 Action::make('edit')->url(fn(Payment $record):string=>route('payments.edite',$record))->openUrlInNewTab(),
-                Action::make('delete')->color('danger')->requiresConfirmation()->action(
-                fn(Payment $record)=>$record->delete($record->id),
-                ),
+                Action::make('delete')->color('danger')->requiresConfirmation()->action(fn(Payment $record)=>$record->delete($record->id),),
                 
             ])
             ->toolbarActions([

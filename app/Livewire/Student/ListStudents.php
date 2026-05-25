@@ -31,7 +31,7 @@ class ListStudents extends Component implements HasActions, HasSchemas, HasTable
                 TextColumn::make('user.name')->searchable()->label('Name'),
                 TextColumn::make('user.email')->searchable()->label('Email'),
                 TextColumn::make('last_name')->label('Lastname'),
-                TextColumn::make('payments.sinf.title'),
+                TextColumn::make('payments.sinf.title')->label('payments'),
                 TextColumn::make('phone_number'),
                 TextColumn::make('tazkira_no')
             ])

@@ -31,6 +31,7 @@ class ListAdmins extends Component implements HasActions, HasSchemas, HasTable
             ->columns([
                 TextColumn::make('user.name'),
                 TextColumn::make('last_name'),
+                TextColumn::make('user.email')->label('email'),
                 TextColumn::make('bio')->toggleable(isToggledHiddenByDefault:true)
             ])
             ->filters([
@@ -41,6 +42,7 @@ class ListAdmins extends Component implements HasActions, HasSchemas, HasTable
             ])
             ->recordActions([
                 Action::make('delete')->requiresConfirmation()->action(fn (Admin $reord)=>$reord->delete($reord->id))->color('danger'),
+                Action::make('edit')->url(fn(Admin $record):string=>route('admin.edit',$record))->openUrlInNewTab(),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

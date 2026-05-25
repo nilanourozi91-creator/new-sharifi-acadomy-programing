@@ -33,18 +33,24 @@ class editteacher extends Component implements HasActions, HasSchemas
         return $schema
             ->components([
                   Section::make('edite payments')->description('edite your payments')->schema([
-                 TextInput::make('amount')->required(),
+                TextInput::make('user.name')->label('teacher'),
+                TextInput::make('last_name'),
+                TextInput::make('sinfs.title'),
+                TextInput::make('phone_number'),
+                TextInput::make('degree_of_education'),
+                TextInput::make('bio'),
                 ]),
             ])
             ->statePath('data')
             ->model($this->record);
     }
 
-    public function save(): void
+    public function save()
     {
         $data = $this->form->getState();
 
         $this->record->update($data);
+        return redirect('/manage-teachers');
     }
 
     public function render(): View

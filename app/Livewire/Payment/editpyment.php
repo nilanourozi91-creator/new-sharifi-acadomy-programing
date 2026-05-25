@@ -34,6 +34,8 @@ class editpyment extends Component implements HasActions, HasSchemas
             ->components([
                 Section::make('edite payments')->description('edite your payments')->schema([
                  TextInput::make('amount')->required(),
+                 TextInput::make('sinf.title')->required(),
+                 TextInput::make('student.user.name'),
                 ]),
             ])
             ->statePath('data')
