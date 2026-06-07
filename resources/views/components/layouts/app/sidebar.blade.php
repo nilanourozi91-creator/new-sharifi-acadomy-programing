@@ -25,9 +25,13 @@
                 </flux:navlist.group>
                 <flux:navlist.group heading="Management" class="grid">
                     <flux:navlist.item icon="user" :href="route('admin.index')" :current="request()->routeIs('admin.index')" wire:navigate>Admin</flux:navlist.item>
+                    <flux:navlist.item icon="user" :href="route('admin.create')" :current="request()->routeIs('admin.create')" wire:navigate> create Admin</flux:navlist.item>
                     <flux:navlist.item icon="user-group" :href="route('users.index')" :current="request()->routeIs('users.index')" wire:navigate>Manage users</flux:navlist.item>
+                    <flux:navlist.item icon="user-plus" :href="route('user.create')" :current="request()->routeIs('user.create')" wire:navigate>create users</flux:navlist.item>
                     <flux:navlist.item icon="user-group" :href="route('teachers.index')" :current="request()->routeIs('teachers.index')" wire:navigate>Manage teachers</flux:navlist.item>
+                    <flux:navlist.item icon="user-plus" :href="route('teacher.create')" :current="request()->routeIs('teacher.create')" wire:navigate>create teachers</flux:navlist.item>
                     <flux:navlist.item icon="user-group" :href="route('students.index')" :current="request()->routeIs('students.index')" wire:navigate>Manage students</flux:navlist.item>
+                    <flux:navlist.item icon="user-group" :href="route('students.create')" :current="request()->routeIs('students.create')" wire:navigate>create student</flux:navlist.item>
                     <flux:navlist.item icon="user-group" :href="route('classes.index')" :current="request()->routeIs('classes.index')" wire:navigate>Manage classes</flux:navlist.item>
 
                     

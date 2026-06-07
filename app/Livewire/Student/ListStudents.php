@@ -9,6 +9,7 @@ use Filament\Actions\Concerns\InteractsWithActions;
 use Filament\Actions\Contracts\HasActions;
 use Filament\Schemas\Concerns\InteractsWithSchemas;
 use Filament\Schemas\Contracts\HasSchemas;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
@@ -33,7 +34,8 @@ class ListStudents extends Component implements HasActions, HasSchemas, HasTable
                 TextColumn::make('last_name')->label('Lastname'),
                 TextColumn::make('payments.sinf.title')->label('payments'),
                 TextColumn::make('phone_number'),
-                TextColumn::make('tazkira_no')
+                TextColumn::make('tazkira_no'),
+                ImageColumn::make('image_url')->disk('public')->label('images')->square(),
             ])
             ->filters([
                 //

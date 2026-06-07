@@ -10,6 +10,7 @@ use Filament\Actions\Contracts\HasActions;
 use Filament\Notifications\Notification;
 use Filament\Schemas\Concerns\InteractsWithSchemas;
 use Filament\Schemas\Contracts\HasSchemas;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
@@ -32,8 +33,9 @@ class ListAdmins extends Component implements HasActions, HasSchemas, HasTable
                 TextColumn::make('user.name'),
                 TextColumn::make('last_name'),
                 TextColumn::make('user.email')->label('email'),
-                TextColumn::make('bio')->toggleable(isToggledHiddenByDefault:true)
-            ])
+                TextColumn::make('bio')->toggleable(isToggledHiddenByDefault:true),
+                ImageColumn::make('image_url')->disk('public')->label('image')->square(),
+                ])
             ->filters([
                 //
             ])

@@ -33,7 +33,7 @@ class ListSinfs extends Component implements HasActions, HasSchemas, HasTable
                 TextColumn::make('title')->label('class')->searchable(),
                 textColumn::make('description')->limit(10)->toggleable(isToggledHiddenByDefault:true),
                 TextColumn::make('start_date'),
-                TextColumn::make('payments.student.user.name')->label('Students'),
+                TextColumn::make('payments.student.user.name')->label('Students')->separator(','),
                 TextColumn::make('end_date'),
                 TextColumn::make('teacher.user.name')->label('teacher'),
             ])
