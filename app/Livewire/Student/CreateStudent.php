@@ -32,11 +32,6 @@ class CreateStudent extends Component implements HasActions, HasSchemas
     public function form(Schema $schema): Schema
     {
         return $schema
-        //  $table->string('last_name');
-        //     $table->foreignId("user_id")->constrained('users','id')->onDelete('cascade')->onUpdate('cascade');
-        //     $table->string('image_url')->nullable();
-        //     $table->string('phone_number'); 
-        //     $table->string('tazkira_no')->nullable();
             ->components([
                  Section::make('Create student')->description('creating new students')->schema([
                   TextInput::make('last_name'),
@@ -56,7 +51,7 @@ class CreateStudent extends Component implements HasActions, HasSchemas
         $record = Student::create($data);
 
         $this->form->model($record)->saveRelationships();
-        return redirect('/');
+        return redirect('/manage-students');
     }
 
     public function render(): View

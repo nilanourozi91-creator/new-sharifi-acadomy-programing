@@ -37,6 +37,7 @@ class ListPayments extends Component implements HasActions, HasSchemas, HasTable
                 //
             ])
             ->headerActions([
+                Action::make('createpayment')->label('create payment')->url(route('payments.create')),
             ])
             ->recordActions([
                 Action::make('edit')->url(fn(Payment $record):string=>route('payments.edite',$record))->openUrlInNewTab(),

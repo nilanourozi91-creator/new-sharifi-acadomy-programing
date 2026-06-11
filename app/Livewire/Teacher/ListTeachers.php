@@ -17,7 +17,10 @@ use Filament\Tables\Contracts\HasTable;
 use Filament\Tables\Table;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Notifications\Action as NotificationsAction;
 use Livewire\Component;
+
+use function Pest\Laravel\actingAs;
 
 class ListTeachers extends Component implements HasActions, HasSchemas, HasTable
 {
@@ -42,7 +45,7 @@ class ListTeachers extends Component implements HasActions, HasSchemas, HasTable
                 //
             ])
             ->headerActions([
-                //
+               Action::make('create teacher')->label('create new teacher')->url(route('teachers.all'))->color('info'),
             ])
             ->recordActions([
                 Action::make('delete')->requiresConfirmation()->action(fn(Teacher $record)=>$record->delete($record->id))->color('danger')->successNotification(

@@ -37,7 +37,7 @@ class ListUsers extends Component implements HasActions, HasSchemas, HasTable
                 //
             ])
             ->headerActions([
-                //
+                Action::make('create new user')->url(route('user.create'))->color('info')->label('create new user'),
             ])
             ->recordActions([
                  Action::make('delete')->requiresConfirmation()->action(fn(User $record)=>$record->delete($record->id))->color('danger')->successNotification(

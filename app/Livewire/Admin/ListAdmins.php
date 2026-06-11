@@ -40,7 +40,7 @@ class ListAdmins extends Component implements HasActions, HasSchemas, HasTable
                 //
             ])
             ->headerActions([
-                //
+                Action::make('create new admin')->label('create new admin')->url(route('admin.create'))->color('info'),
             ])
             ->recordActions([
                 Action::make('delete')->requiresConfirmation()->action(fn (Admin $reord)=>$reord->delete($reord->id))->color('danger'),
